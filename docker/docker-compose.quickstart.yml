@@ -3,6 +3,8 @@ services:
     build:
       context: ..
       dockerfile: Dockerfile
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "${PAPERCLIP_PORT:-3100}:3100"
     environment:
