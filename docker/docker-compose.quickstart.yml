@@ -24,6 +24,7 @@ services:
       - "traefik.http.routers.paperclip.rule=Host(`pipe.pipedocs.app`)"
       - "traefik.http.routers.paperclip.entrypoints=websecure"
       - "traefik.http.routers.paperclip.tls=true"
+      - "traefik.http.routers.paperclip.tls.certresolver=le"
       - "traefik.http.services.paperclip.loadbalancer.server.port=3100"
     networks:
       - proxy
