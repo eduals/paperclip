@@ -63,6 +63,14 @@ RUN npm install --global --omit=dev @anthropic-ai/claude-code@latest @openai/cod
 COPY scripts/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
+RUN apt-get update \
+  && apt-get install -y python3 python3-pip python3-venv \
+  && python3 -m venv /opt/hermes-venv \
+  && /opt/hermes-venv/bin/pip install --upgrade pip \
+  && /opt/hermes-venv/bin/pip install hermes-agent \
+  && ln -sf /opt/hermes-venv/bin/hermes /usr/local/bin/hermes \
+  && rm -rf /var/lib/apt/lists/*
+  
 ENV NODE_ENV=production \
   HOME=/paperclip \
   HOST=0.0.0.0 \
